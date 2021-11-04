@@ -2,7 +2,8 @@ import './App.css';
 import { useState } from 'react'
 
 const getImages = async query => {
-  const url = "http://127.0.0.1:8787";
+  // const url = "http://127.0.0.1:8787";
+  const url = "https://serverless_api.barojins.workers.dev/"
   const resp = await fetch(url, {
       method: "POST",
       body: JSON.stringify({query}),
