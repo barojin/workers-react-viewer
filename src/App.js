@@ -4,12 +4,24 @@ import { useState } from 'react'
 
 const getImages = async query => {
   // const url = "https://workers-unsplash-api.signalnerve.workers.dev";
-  const url = "http://127.0.0.1:8787";
-  const resp = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify({query}),
-    headers: { 'Content-type': 'application/json'}
-  })
+  let url = "http://127.0.0.1:8787";
+  let resp = null;
+  try{
+    resp = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({query}),
+      headers: { 'Content-type': 'application/json'}
+    })
+  } catch (e) {
+    if (e instanceof TypeError && e.message.includes("Failed to fetch")){
+      url = "https://workers-unsplash-api.signalnerve.workers.dev";
+    }
+    resp = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({query}),
+      headers: { 'Content-type': 'application/json'}
+    })    
+  }  
   return resp.json()
 }
 
