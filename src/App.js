@@ -1,45 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react'
 
 const getImages = async query => {
-  // The base URL for our API
-  const url = "https://workers-unsplash-api.signalnerve.workers.dev"
-
+  const url = "http://127.0.0.1:8787";
   const resp = await fetch(url, {
-    // Send a POST request
-    method: "POST",
-    // With a JSON-stringified body containing the query from our input
-    body: JSON.stringify({ query }),
-    // Set the `Content-type` header so our API knows that the request
-    // is sending JSON
-    headers: { 'Content-type': 'application/json' }
+      method: "POST",
+      body: JSON.stringify({query}),
+      headers: { 'Content-type': 'application/json'}
   })
   return resp.json()
 }
-
-// const getImages = async query => {
-//   // const url = "https://workers-unsplash-api.signalnerve.workers.dev";
-//   let url = "http://127.0.0.1:8787";
-//   let resp = null;
-//   try{
-//     resp = await fetch(url, {
-//       method: "POST",
-//       body: JSON.stringify({query}),
-//       headers: { 'Content-type': 'application/json'}
-//     })
-//   } catch (e) {
-//     if (e instanceof TypeError && e.message.includes("Failed to fetch")){
-//       url = "https://workers-unsplash-api.signalnerve.workers.dev";
-//     }
-//     resp = await fetch(url, {
-//       method: "POST",
-//       body: JSON.stringify({query}),
-//       headers: { 'Content-type': 'application/json'}
-//     })    
-//   }  
-//   return resp.json()
-// }
 
 function App() {
   // Store the query that we'll search for in a simple useState hook
